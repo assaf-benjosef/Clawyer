@@ -1,0 +1,35 @@
+{
+  "name": "@clawyer/openclaw-plugin",
+  "version": "0.1.0",
+  "description": "Semantic security guardrail plugin for OpenClaw — intercepts sensitive tool calls with human-in-the-loop approval",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "openclaw": {
+    "extensions": [
+      "./dist/index.js"
+    ]
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "security",
+    "guardrail",
+    "hitl"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "openclaw": "^2026.3.28",
+    "typescript": "^5.7.0",
+    "vitest": "^3.1.0"
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.34.49"
+  }
+}

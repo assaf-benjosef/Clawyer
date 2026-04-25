@@ -1,0 +1,45 @@
+{
+  "id": "clawyer",
+  "name": "Clawyer — Semantic Security Guardrail",
+  "description": "Intercepts sensitive tool calls and requires human approval with semantic context before execution.",
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "policies": {
+        "type": "object",
+        "properties": {
+          "default": {
+            "type": "string",
+            "enum": ["allow", "block"],
+            "default": "allow",
+            "description": "Default action for tools not matching any rule."
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tools": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "Tool name patterns (supports * wildcards). E.g. 'exec', 'write', 'github_*'."
+                },
+                "mode": {
+                  "type": "string",
+                  "enum": ["human_approval", "block"],
+                  "description": "Action: pause for human approval, or hard-block."
+                },
+                "dangerousCommands": {
+                  "type": "array",
+                  "items": { "type": "string" },
+                  "description": "Optional: regex patterns for exec command args. If omitted, built-in defaults used."
+                }
+              },
+              "required": ["tools", "mode"]
+            }
+          }
+        }
+      }
+    }
+  }
+}
