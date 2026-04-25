@@ -31,6 +31,26 @@ cd clawyer
 
 This will safely compile the TypeScript bindings and construct a native config payload to safely inject the permissions into your OpenClaw JSON array.
 
+## Configuration & Policies
+
+Clawyer's policies are deeply integrated into OpenClaw's native configuration engine via our plugin manifest. You don't need to edit the source code to change what commands are considered "dangerous" or which tools to block outright.
+
+You can natively override the heuristic matching rules using `openclaw config`:
+
+```bash
+# Example: Adding specific dangerous commands to the policy
+openclaw config set plugins.clawyer.policies '{
+  "default": "allow",
+  "rules": [
+    {
+      "tools": ["exec"],
+      "mode": "human_approval",
+      "dangerousCommands": ["\\brm\\b", "\\bcurl\\b", "\\bsudo\\b", "\\bdocker rmi\\b"]
+    }
+  ]
+}' --strict-json
+```
+
 ## Roadmap 🚀
 
 - **Phase 1 (MVP)**: Heuristic regex matching, FNV-1a anti-cheat binding, and native UI fallback. *(Completed)*
